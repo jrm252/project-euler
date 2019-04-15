@@ -3,7 +3,7 @@ Yet another person working on solving problems on ProjectEuler.net
 
 My goal is to implement the solutions in several languages:
 
-asm - x64 assembly on Linux (this will likely get to difficult to make much progress </br>
+asm - x64 assembly on Linux (this will likely get too difficult to make much progress) </br>
 c - easier than assembly </br>
 c# - My daily development language </br>
 f# - Very little experience. </br>
