@@ -223,14 +223,14 @@ def problem11
     p maxProduct
 end
 
-#problem1
-#problem2
-#problem3
-#problem4
-#problem5
-#problem6
-#problem7
-#problem8
-#problem9
+problem1
+problem2
+problem3
+problem4
+problem5
+problem6
+problem7
+problem8
+problem9
 #problem10  #SLOOOOOOW
 problem11
