@@ -238,7 +238,7 @@ void problem10()
     while(prime < 2000000)
     {
         sumOfPrimes += prime;
-        nextPrime = prime+2;
+        nextPrime = prime+1;
         while(!isPrime(nextPrime))
         {
             nextPrime++;
@@ -368,7 +368,7 @@ int main()
     problem7();
     problem8();
     problem9();
-    //problem10();    //slow
+    problem10(); 
     problem11();
     problem12();
 
