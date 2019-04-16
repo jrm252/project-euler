@@ -223,6 +223,38 @@ def problem11
     p maxProduct
 end
 
+def getDivisorCount(number)
+    divisorCount = 0
+    maxDivisor = (number**0.5).floor
+    (1..maxDivisor).each do |divisor|
+        if(number%divisor==0)
+            divisorCount = divisorCount + 2
+        end
+    end
+    if(number == maxDivisor**2)
+        divisorCount = divisorCount - 2
+    end
+    return divisorCount
+end
+
+def problem12
+    
+    previousT = 1
+    nextT = -1
+    index = 1
+    divisorCount = 0;
+
+    while(divisorCount <= 500)
+        maxDivisorCount = divisorCount
+        
+        index=index+1
+        nextT = previousT + index
+        divisorCount = getDivisorCount(nextT)
+        previousT = nextT
+    end
+    p nextT
+end
+
 problem1
 problem2
 problem3
@@ -232,5 +264,6 @@ problem6
 problem7
 problem8
 problem9
-problem10
+#problem10 #too slow
 problem11
+problem12
