@@ -1,6 +1,6 @@
-euhler: euhler.c
-	gcc -o euhler euhler.c -lm
+euler: euler.c
+	gcc -o euler euler.c -lm
 clean:
-	rm euhler
-run: euhler
-	./euhler
+	rm euler
+run: euler
+	./euler

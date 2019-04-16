@@ -1,14 +1,14 @@
-;euhler: euhler.o
-;	gcc euhler.o
-;	;ld -m elf_x86_64 -o euhler euhler.o
-;euhler.o: euhler.asm
-;	nasm -f elf64 -g -F stabs euhler.asm -l euhler.lst
+;euler: euler.o
+;	gcc euler.o
+;	;ld -m elf_x86_64 -o euler euler.o
+;euler.o: euler.asm
+;	nasm -f elf64 -g -F stabs euler.asm -l euler.lst
 ;clean:
 ;	rm *.lst
 ;	rm *.o
-;	rm euhler
-;run: euhler
-;	./euhler
+;	rm euler
+;run: euler
+;	./euler
 
 
 
