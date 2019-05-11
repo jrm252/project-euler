@@ -30,42 +30,44 @@ section .text   ;Section containing code
 main:
         nop     ;This nop keeps gdb happy
 
-        mov r9, 100;4000000 ;maxFib
-        mov r10, 1      ;fib1
-        mov r11, 2      ;fib2
-        mov r12, 0      ;nextFib
-        mov r13, 2      ;sum (2 is the first even fibonacci #)
-
+        mov rax, 990
+        mov rbx, 0
+        mov rcx, 0
 Loop:
-        mov r12, r11    ;nextFib = fib2
-        add r12, r10    ;               + fib1
+        inc rbx         ;1 (or 15n + 1)
+        inc rbx         ;2 (or 15n + 2)
+        inc rbx         ;3 (or 15n + 3)
+        add rcx, rbx
+
+        inc rbx         ;4 (or 15n + 4)
+        inc rbx         ;5 (or 15n + 5)
+        add rcx, rbx                
+
+        inc rbx         ;6 (or 15n + 6)
+        add rcx, rbx
         
-        cmp r12, r9     ;if(nextfib > maxFib)
-        ja _end         ;   _end
+        inc rbx         ;7 (or 15n + 7)
+        inc rbx         ;8 (or 15n + 8)
+        inc rbx         ;9 (or 15n + 9)
+        add rcx, rbx
 
-        mov r14, r12    
-        and r14, 0b0000_0000_0000_0000_0000_0000_0000_0001
-        cmp r14, 0
-        jne Store        ;jump past Even label if odd
+        inc rbx         ;10 (or 15n + 10)
+        add rcx, rbx
 
-Even:
-        add r13, r12    ; sum += nextFib
+        inc rbx         ;11 (or 15n + 11)
+        inc rbx         ;12 (or 15n + 12)
+        add rcx, rbx
+        
+        inc rbx         ;13 (or 15n + 13)
+        inc rbx         ;14 (or 15n + 14)
+        inc rbx         ;15 (or 15n + 15)       
+        add rcx, rbx
 
-Store:
-        mov r10, r11    ; fib1 = fib2
-        mov r11, r12    ; fib2 = nextFib
-
-        ;debug
-        ;mov rax, r11
-        ;call print      ;print(fib2)
-
-        ;mov rax, r13
-        ;call print      ;print(sum)
-
-        ;debug off
+        cmp rbx, rax
+        jnb _end
 
         jmp Loop
-
+        
 print:
         ; We need to call printf, but we are using rax, rbx, and rcx.  printf
         ; may destroy rax and rcx so we will save these before the call and
@@ -88,7 +90,25 @@ print:
         nop     ;This nop keeps gdb happy
 
 _end:
-        mov rax, r13
+        inc rbx         ;991 (or 15n + 1)
+        inc rbx         ;992 (or 15n + 2)
+        inc rbx         ;993 (or 15n + 3)
+        add rcx, rbx
+        
+        inc rbx         ;994 (or 15n + 4)
+        inc rbx         ;995 (or 15n + 5)
+        add rcx, rbx
+        
+        inc rbx         ;996 (or 15n + 6)
+        add rcx, rbx        
+        
+        inc rbx         ;997 (or 15n + 7)
+        inc rbx         ;998 (or 15n + 8)
+        inc rbx         ;999 (or 15n + 9)
+        add rcx, rbx
+
+
+        mov rax, rcx
         call print      ;print(rax)
 
         mov rax, 1      ;Code for Exit Syscall
