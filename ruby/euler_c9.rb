@@ -506,6 +506,131 @@ def problem27
     p aMaxN * bMaxN
 end
 
+def problem28
+    prev = 1
+    sum = 1
+    (1..500).each do |spiralDiameter|
+        step = 2 * spiralDiameter
+        next1 = prev + step
+        next2 = next1 + step
+        next3 = next2 + step
+        next4 = next3 + step
+
+        sum = sum + next1
+        sum = sum + next2
+        sum = sum + next3
+        sum = sum + next4
+
+        prev = next4
+    end
+    p sum
+end
+
+def problem29
+    # ab for 2 ≤ a ≤ 100 and 2 ≤ b ≤ 100?
+    values = Hash.new
+    (2..100).each do |a|
+        (2..100).each do |b|
+            values[a**b] = 1
+        end
+    end
+
+    p values.count
+end
+
+def problem30
+    answer = 0
+    (10..2000000).each do |n|
+        sum = 0
+        n.to_s.chars.each do |char|
+            sum = sum + char.to_i**5
+        end
+        if(sum == n)
+            p n
+            answer = answer + n
+        end
+    end 
+    
+    p answer
+end
+
+def problem31
+    sum = 0
+    (0..200).each do |p1|
+        total1 = p1
+        (0..100).each do |p2|
+            total2 = total1 + 2*p2
+            if(total2 > 200)
+                break
+            end
+            (0..40).each do |p5|
+                total5 = total2 + 5*p5
+                if(total5 > 200)
+                    break
+                end
+                (0..20).each do |p10|                
+                    total10 = total5 + 10*p10
+                    if(total10 > 200)
+                        break
+                    end                    
+                    (0..10).each do |p20|    
+                        total20 = total10 + 20*p20            
+                        if(total20 > 200)
+                            break
+                        end                        
+                        (0..4).each do |p50|      
+                            total50 = total20 + 50*p50          
+                            if(total50 > 200)
+                                break
+                            end                            
+                            (0..2).each do |p100|
+                                total100 = total50 + 100*p100
+                                if(total100 > 200)
+                                    break
+                                end                                
+                                (0..1).each do |p200|
+                                    total200 = total100 + 200*p200
+                                    if(total200 == 200)
+                                        sum = sum + 1
+                                    end 
+                                end
+                            end
+                        end
+                    end                    
+                end
+            end
+        end
+    end
+    p sum
+end
+
+def isPanDigital(a, b, c)
+    digits = (a.to_s + b.to_s + c.to_s).chars.sort.to_s     
+    if(digits == "[\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\"]" )
+        return true
+    else
+        return false
+    end
+end
+
+def problem32
+    products = Hash.new
+
+    (1..299).each do |a|
+        (1..2999).each do |b|
+            product = a*b
+            if(isPanDigital(a,b,product))
+                products[product] = 1
+            end
+        end
+    end
+    sum=0
+    products.keys.each do |n|
+        sum = sum + n
+    end
+    p sum
+end
+
 #problem1
 #problem2
 #problem3
@@ -527,4 +652,10 @@ end
 #problem24
 #problem25
 #problem26
-problem27
+#problem27
+#problem28
+#problem29
+#problem30
+#problem31
+problem32
+

@@ -1,3 +1,5 @@
+require 'bigdecimal'
+require 'bigdecimal/util'
 
 def problem1
     sum = 0
@@ -31,6 +33,9 @@ def problem2
 end
 
 def isPrime(num)
+    if num < 2 
+        return false
+    end 
     maxFactor = (num**0.5).floor
     (2..maxFactor).each do |x|
         if(num % x == 0)
@@ -255,15 +260,271 @@ def problem12
     p nextT
 end
 
-problem1
-problem2
-problem3
-problem4
-problem5
-problem6
-problem7
-problem8
-problem9
+$route = Hash.new
+def routes(x,y)  
+  
+    if(x==0 || y==0)
+        return 1
+    else
+        key = "%02d%02d" % [x,y]
+        if($route.has_key?(key))
+            return $route[key]
+        end
+        answer = routes(x,y-1) + routes(x-1,y)
+        $route[key] = answer
+        return answer
+    end
+end
+
+def problem15
+    p routes(20,20)
+end
+
+def problem16
+    sum = 0
+    (2**1000).to_s().scan(/./).each do |digit|
+        sum = sum + digit.to_i
+    end
+    p sum
+end
+
+def problem17
+    onesList = { 0 => "",
+        1 => "one",
+        2 => "two",
+        3 => "three",
+        4 => "four",
+        5 => "five",
+        6 => "six",
+        7 => "seven",
+        8 => "eight",
+        9 => "nine"
+    }
+    
+    teensList = { 10 => "ten",
+        11 => "eleven",
+        12 => "twelve",
+        13 => "thirteen",
+        14 => "fourteen",
+        15 => "fifteen",
+        16 => "sixteen",
+        17 => "seventeen",
+        18 => "eighteen",
+        19 => "nineteen"
+    }
+
+    tensList = { 0 => "",    
+        2 => "twenty",
+        3 => "thirty",
+        4 => "forty",
+        5 => "fifty",
+        6 => "sixty",
+        7 => "seventy",
+        8 => "eighty",
+        9 => "ninety"
+    }
+    strNumber = ""
+    sum = 0
+    ones = 0
+    tens = 0
+    hundreds = 0
+    (1..1000).each do |num|
+        numLength = 0
+        strNumber = ""
+        if(num==1000)
+            strNumber = "one thousand"
+        else
+            ones = num % 10
+      
+            tens = ((num % 100) - ones) / 10
+    
+            hundreds = (num - tens - ones) / 100
+         
+            # four hundred
+            if(hundreds > 0)
+                strNumber = onesList[hundreds] + " hundred"                
+            end
+
+            # and
+            if(hundreds > 0 && !(ones == 0 and tens == 0))
+                strNumber = strNumber + " and "                
+            end
+
+            #n01 - n99
+            if(tens == 0)
+                #n01 - n09
+                strNumber = strNumber + onesList[ones].to_s
+            else
+                if(tens == 1)
+                    #teens n01 - n19
+                    strNumber = strNumber + teensList[ones + 10].to_s                   
+                else
+                    #n20-n99
+                    strNumber = strNumber + tensList[tens].to_s + onesList[ones].to_s
+                end 
+            end       
+
+        end
+
+        strNumber.gsub!(/ /, "")
+        strNumber.gsub!(/-/, "")
+        numLength = strNumber.length
+        sum = sum + numLength
+        #p [strNumber, numLength, sum]        
+    end
+    p sum
+end
+
+def problem24
+    # A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:
+    # 012   021   102   120   201   210
+    # What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+
+    count = 0
+    (0..9).each do |n9|
+        (0..9).each do |n8|
+            if n8 != n9
+                (0..9).each do |n7|
+                    if(n7!=n8 && n7 != n9)
+                        (0..9).each do |n6|
+                            if(n6!=n7 && n6!=n8 && n6 != n9)
+                                (0..9).each do |n5|
+                                    if(n5!=n6 && n5!=n7 && n5!=n8 && n5 != n9)
+                                        (0..9).each do |n4|
+                                            if(n4!=n5 && n4!=n6 && n4!=n7 && n4!=n8 && n4 != n9)
+                                                (0..9).each do |n3|
+                                                    if(n3!=n4 && n3!=n5 && n3!=n6 && n3!=n7 && n3!=n8 && n3 != n9)
+                                                        (0..9).each do |n2|
+                                                            if(n2!=n3 && n2!=n4 && n2!=n5 && n2!=n6 && n2!=n7 && n2!=n8 && n2 != n9)
+                                                                (0..9).each do |n1|
+                                                                    if(n1!=n2 && n1!=n3 && n1!=n4 && n1!=n5 && n1!=n6 && n1!=n7 && n1!=n8 && n1 != n9)
+                                                                        (0..9).each do |n0|
+                                                                            if(n0!=n1 && n0!=n2 && n0!=n3 && n0!=n4 && n0!=n5 && n0!=n6 && n0!=n7 && n0!=n8 && n0 != n9)
+                                                                                count=count+1
+                                                                                if(count==1000000)
+                                                                                    print [n9, n8,n7,n6,n5,n4,n3,n2,n1,n0]
+                                                                                    p
+                                                                                    return
+                                                                                end
+                                                                            end
+                                                                        end
+                                                                    end
+                                                                end
+                                                            end
+                                                        end
+                                                    end
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end     
+    end
+end
+
+def problem25
+
+    term1 = 1
+    term2 = 1
+    termCount = 2
+    (1..1000000).each do |n|
+        termCount = termCount + 1
+        newTerm = term1 + term2
+        if newTerm.to_s.chars.count == 1000
+            p termCount
+            return
+        end
+        term1 = term2
+        term2 = newTerm
+    end
+end
+
+def getRepeatLength(d)
+    decimals = []
+    remainders = []
+    remainder = 10
+    (0...10000).each do |i|
+        decimals = decimals + [remainder / d]
+        newRemainder = remainder % d
+
+        if remainders.include? (newRemainder) 
+            #p [0] + decimals
+            #p remainders + [newRemainder]        
+            return i - (remainders.index(newRemainder))
+        end
+
+        remainders = remainders + [newRemainder]        
+        remainder = 10 * (newRemainder)       
+        if remainder == 0 
+            break 
+        end
+    end
+    #p [0] + decimals
+    #p remainders
+    return 0
+end
+
+def problem26
+    maxLen = 0
+    dMax = -1
+    (2...1000).each do |d|    
+        len = getRepeatLength(d)
+        #p [d, len]
+        #p ""
+        if(len > maxLen)
+            maxLen = len
+            dMax = d
+        end
+    end
+    p dMax
+end
+
+def problem27
+    maxN = 0
+    aMaxN = 0
+    bMaxN = 0
+    (-999..999).each do |a|
+        (-1000..1000).each do |b|
+            (0..100).each do |n|
+                if !isPrime(n*n + a*n + b)
+                    if n > maxN
+                        maxN = n
+                        aMaxN = a
+                        bMaxN = b
+                    end
+                    #p [n, a, b]
+                    break
+                end
+            end
+        end
+    end
+    p aMaxN * bMaxN
+end
+
+#problem1
+#problem2
+#problem3
+#problem4
+#problem5
+#problem6
+#problem7
+#problem8
+#problem9
 #problem10 #too slow
-problem11
-problem12
+#problem11
+#problem12 #too slow
+
+
+#problem15
+#problem16
+#problem17
+
+#problem24
+#problem25
+#problem26
+problem27
