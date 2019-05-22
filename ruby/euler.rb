@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-require 'bigdecimal'
-require 'bigdecimal/util'
-
-=======
->>>>>>> 6b88008f1268909e8bfe66b0327e37942f803c8a
 def problem1
     sum = 0
     (1...1000)
@@ -378,52 +372,6 @@ def problem17
     p sum
 end
 
-<<<<<<< HEAD
-def problem24
-    # A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:
-    # 012   021   102   120   201   210
-    # What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
-
-    count = 0
-    (0..9).each do |n9|
-        (0..9).each do |n8|
-            if n8 != n9
-                (0..9).each do |n7|
-                    if(n7!=n8 && n7 != n9)
-                        (0..9).each do |n6|
-                            if(n6!=n7 && n6!=n8 && n6 != n9)
-                                (0..9).each do |n5|
-                                    if(n5!=n6 && n5!=n7 && n5!=n8 && n5 != n9)
-                                        (0..9).each do |n4|
-                                            if(n4!=n5 && n4!=n6 && n4!=n7 && n4!=n8 && n4 != n9)
-                                                (0..9).each do |n3|
-                                                    if(n3!=n4 && n3!=n5 && n3!=n6 && n3!=n7 && n3!=n8 && n3 != n9)
-                                                        (0..9).each do |n2|
-                                                            if(n2!=n3 && n2!=n4 && n2!=n5 && n2!=n6 && n2!=n7 && n2!=n8 && n2 != n9)
-                                                                (0..9).each do |n1|
-                                                                    if(n1!=n2 && n1!=n3 && n1!=n4 && n1!=n5 && n1!=n6 && n1!=n7 && n1!=n8 && n1 != n9)
-                                                                        (0..9).each do |n0|
-                                                                            if(n0!=n1 && n0!=n2 && n0!=n3 && n0!=n4 && n0!=n5 && n0!=n6 && n0!=n7 && n0!=n8 && n0 != n9)
-                                                                                count=count+1
-                                                                                if(count==1000000)
-                                                                                    print [n9, n8,n7,n6,n5,n4,n3,n2,n1,n0]
-                                                                                    p
-                                                                                    return
-                                                                                end
-                                                                            end
-                                                                        end
-                                                                    end
-                                                                end
-                                                            end
-                                                        end
-                                                    end
-                                                end
-                                            end
-                                        end
-                                    end
-                                end
-                            end
-=======
 $row00 = [75]
 $row01 = [95, 64]
 $row02 = [17, 47, 82]
@@ -542,118 +490,10 @@ def problem19
                         dayOfWeek = (dayOfWeek + 1) % 7
                         if(year > 1900 && dayOfWeek == 0 && dayOfMonth == 1)
                             sundaysOnFirst = sundaysOnFirst + 1
->>>>>>> 6b88008f1268909e8bfe66b0327e37942f803c8a
                         end
                     end
                 end
             end
-<<<<<<< HEAD
-        end     
-    end
-end
-
-def problem25
-
-    term1 = 1
-    term2 = 1
-    termCount = 2
-    (1..1000000).each do |n|
-        termCount = termCount + 1
-        newTerm = term1 + term2
-        if newTerm.to_s.chars.count == 1000
-            p termCount
-            return
-        end
-        term1 = term2
-        term2 = newTerm
-    end
-end
-
-def getRepeatLength(d)
-    decimals = []
-    remainders = []
-    remainder = 10
-    (0...10000).each do |i|
-        decimals = decimals + [remainder / d]
-        newRemainder = remainder % d
-
-        if remainders.include? (newRemainder) 
-            #p [0] + decimals
-            #p remainders + [newRemainder]        
-            return i - (remainders.index(newRemainder))
-        end
-
-        remainders = remainders + [newRemainder]        
-        remainder = 10 * (newRemainder)       
-        if remainder == 0 
-            break 
-        end
-    end
-    #p [0] + decimals
-    #p remainders
-    return 0
-end
-
-def problem26
-    maxLen = 0
-    dMax = -1
-    (2...1000).each do |d|    
-        len = getRepeatLength(d)
-        #p [d, len]
-        #p ""
-        if(len > maxLen)
-            maxLen = len
-            dMax = d
-        end
-    end
-    p dMax
-end
-
-def problem27
-    maxN = 0
-    aMaxN = 0
-    bMaxN = 0
-    (-999..999).each do |a|
-        (-1000..1000).each do |b|
-            (0..100).each do |n|
-                if !isPrime(n*n + a*n + b)
-                    if n > maxN
-                        maxN = n
-                        aMaxN = a
-                        bMaxN = b
-                    end
-                    #p [n, a, b]
-                    break
-                end
-            end
-        end
-    end
-    p aMaxN * bMaxN
-end
-
-#problem1
-#problem2
-#problem3
-#problem4
-#problem5
-#problem6
-#problem7
-#problem8
-#problem9
-#problem10 #too slow
-#problem11
-#problem12 #too slow
-
-
-#problem15
-#problem16
-#problem17
-
-#problem24
-#problem25
-#problem26
-problem27
-=======
         end
     end
                 
@@ -779,4 +619,3 @@ problem20
 problem21
 problem22
 #problem23
->>>>>>> 6b88008f1268909e8bfe66b0327e37942f803c8a
